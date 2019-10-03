@@ -14,6 +14,7 @@ namespace MonoShared
 {
     class Sence1 : YPScene
     {
+        Text text;
 
         protected override void Start()
         {
@@ -38,14 +39,11 @@ namespace MonoShared
             textButton.transform.Position = new Vector2(0, 500);
             Instantiate(textButton);
         }
-
-        Text text;
-        int i = 0;
+        
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            //text.transform.Rotation += 0.1f;
+            text.transform.Rotation += 0.1f;
         }
 
         protected override void Draw(GameTime gameTime)
