@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>0cb0948c-cc58-4ed4-be9e-3ca6e53fabed</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MonoShared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Sence1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPLib\TextSizer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\SceneObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Transform.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\Button.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\Text.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\TextButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\UI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPScene.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+  </ItemGroup>
+</Project>
