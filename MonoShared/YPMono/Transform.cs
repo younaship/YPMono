@@ -18,8 +18,8 @@ namespace YPMono
         /// <summary>
         /// Can use only "TopLeft" now.
         /// </summary>
-        public PivotPoint Pivot { set; get; } 
-        public Vector2 Position { set { SetPositon(value); } get { return GetPosition(); } }
+        public PivotPoint Pivot { set; get; }
+        public Vector2 Position; //{ set { SetPositon(value); } get { return GetPosition(); } }
         public Vector2 LocalPosition { set; get; }
         public Vector2 Size;
         public float Scale;

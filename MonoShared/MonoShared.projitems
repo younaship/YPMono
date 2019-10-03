@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\Text.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\TextButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\UI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPMono.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPScene.cs" />
   </ItemGroup>
   <ItemGroup>

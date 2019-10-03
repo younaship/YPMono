@@ -19,7 +19,7 @@ namespace MonoShared
         {
             text = new Text()
             {
-                text = "HELLO はろー ｺﾝﾊﾞﾝﾜ hello"
+                text = "Hello world."
             };
             text.transform.Position = new Vector2(0,0);
             text.transform.Size = new Vector2(300, 100);
@@ -27,16 +27,19 @@ namespace MonoShared
             var btn = new Button() { };
             btn.transform.Position = new Vector2(300, 300);
             btn.transform.Size = new Vector2(150, 100);
-            btn.onClick += () => { text.text = "Clickd."; };
+            btn.onClick += () => {
+                text.text = "Clickd.";
+            };
 
             Instantiate(text);
             Instantiate(btn);
 
             
+            /*
             var textButton = new TextButton();
             textButton.Text.text = "HAY";
             textButton.transform.Position = new Vector2(0, 500);
-            Instantiate(textButton);
+            Instantiate(textButton);*/
         }
 
         Text text;
