@@ -37,7 +37,7 @@ namespace YPMono
         }
         private void SetPositon(Vector2 pos)
         {
-            if (sceneObject.root != null) this.LocalPosition = GetAbsPosition(sceneObject.transform.Position, pos);
+            if (sceneObject.root != null) this.Position = GetAbsPosition(sceneObject.transform.Position, pos);
             else this.LocalPosition = pos;
         }
 
