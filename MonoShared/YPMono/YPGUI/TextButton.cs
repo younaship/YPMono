@@ -5,45 +5,41 @@ using System.Text;
 
 namespace YPMono.YPGUI
 {
-    public class TextButton : UI
+    public class TextButton : Button
     {
         public TextButton()
         {
-            this.Button = new Button();
-            this.Button.transform.Size = new Vector2(300, 100);
             this.Text = new Text();
-            this.Text.transform.Size = new Vector2(300, 100);
-            this.Text.root = this.Button;
+            this.Text.pivot = PivotPoint.Center;
+            this.Text.root = this;
         }
 
         public Text Text { set; get; }
-        public Button Button { set; get; }
 
         public override void OnCreate(YPScene scene)
         {
             base.OnCreate(scene);
-            Button.OnCreate(scene);
+
+            this.Text.transform.Size = this.transform.Size;
+            scene.Instantiate(Text);
             Text.OnCreate(scene);
         }
 
         public override void Start(YPScene scene)
         {
             base.Start(scene);
-            Button.Start(scene);
             Text.Start(scene);
         }
 
         public override void Update(YPScene scene)
         {
             base.Update(scene);
-            Button.Update(scene);
             Text.Update(scene);
         }
 
         public override void OnDestory(YPScene scene)
         {
             base.OnDestory(scene);
-            Button.OnDestory(scene);
             Text.OnDestory(scene);
         }
     }

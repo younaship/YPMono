@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using YPMono.Animation;
+
 namespace YPMono
 {
     public class Transform
@@ -19,25 +21,32 @@ namespace YPMono
         /// Can use only "TopLeft" now.
         /// </summary>
         public PivotPoint Pivot { set; get; }
-        public Vector2 Position; //{ set { SetPositon(value); } get { return GetPosition(); } }
+        public Vector2 Position { set { SetPositon(value); } get { return GetPosition(); } }
         public Vector2 LocalPosition { set; get; }
         public Vector2 Size;
         public float Scale;
         public float Rotation;
 
+        public TransAnim transAnim { get; set; }
+
         public Vector2 GetCenterPosition()
         {
             return new Vector2(Position.X + (Size.X / 2), Position.Y + (Size.Y / 2));
         }
+
+        public Vector2 GetHalfSize()
+        {
+            return new Vector2(Size.X / 2, Size.Y / 2);
+        }
         
         private Vector2 GetPosition()
         {
-            if (sceneObject.root != null) return GetAbsPosition(sceneObject.transform.Position, LocalPosition);
+            if (sceneObject.root != null) return GetAbsPosition(sceneObject.root.transform.Position, LocalPosition);
             return LocalPosition;
         }
         private void SetPositon(Vector2 pos)
         {
-            if (sceneObject.root != null) this.Position = GetAbsPosition(sceneObject.transform.Position, pos);
+            if (sceneObject.root != null) this.LocalPosition = GetAbsPosition(sceneObject.root.transform.Position, pos);
             else this.LocalPosition = pos;
         }
 

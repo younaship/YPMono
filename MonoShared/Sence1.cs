@@ -18,6 +18,7 @@ namespace MonoShared
 
         protected override void Start()
         {
+            
             text = new Text()
             {
                 text = "Hello world."
@@ -25,28 +26,24 @@ namespace MonoShared
             text.transform.Position = new Vector2(0,0);
             text.transform.Size = new Vector2(300, 100);
 
-            var btn = new Button() { };
-            btn.transform.Position = new Vector2(300, 300);
-            btn.transform.Size = new Vector2(150, 100);
-            btn.onClick += () => {
+            Instantiate(text);
+   
+            var textButton = new TextButton();
+            textButton.Text.text = "Text Button";
+            textButton.transform.Position = new Vector2(350, 350);
+            textButton.transform.Size = new Vector2(300, 100);
+            textButton.onClick += () =>
+            {
                 text.text = "Clickd.";
             };
 
-            Instantiate(text);
-            Instantiate(btn);
-
-            
-            /*
-            var textButton = new TextButton();
-            textButton.Text.text = "HAY";
-            textButton.transform.Position = new Vector2(0, 500);
-            Instantiate(textButton);*/
+            Instantiate(textButton);
         }
         
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            text.transform.Rotation += 0.1f;
+           // text.transform.Rotation += 0.1f;
         }
 
         protected override void Draw(GameTime gameTime)

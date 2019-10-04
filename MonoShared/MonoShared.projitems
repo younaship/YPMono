@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Main.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sence1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPLib\TextSizer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Animation\Animation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Animation\TransAnim.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\SceneObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\Transform.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\Button.cs" />

@@ -12,10 +12,11 @@ namespace YPMono.YPGUI
     {
         const int FONT_SIZE_PIXEL = 36;
 
-        public Text() { text = ""; color = Color.White; }
+        public Text() { text = ""; color = Color.White; pivot = PivotPoint.TopLeft; }
         
         public string text { get; set; }
         public Color color { get; set; }
+        public PivotPoint pivot { get; set; }
 
         public Vector2 Center { get; }
 
@@ -38,10 +39,20 @@ namespace YPMono.YPGUI
         public override void Update(YPScene scene)
         {
             base.Update(scene);
+            Vector2 pos = Vector2.Zero;
+            switch (pivot)
+            {
+                case PivotPoint.TopLeft:
+                    pos = this.transform.Position + GetTextCenter();
+                    break;
+                case PivotPoint.Center:
+                    pos = this.transform.Position + transform.GetHalfSize();
+                    break;
+            }
 
             scene.drawEvents += (x) => {
-                x.DrawString(spriteFont, text, this.transform.Position + GetTextCenter(), color,
-                    this.transform.Rotation, GetTextCenter(), this.transform.Scale, SpriteEffects.None, 0); // TopLeft
+                x.DrawString(spriteFont, text, pos, color,
+                    this.transform.Rotation, GetTextCenter(), this.transform.Scale, SpriteEffects.None, 0); 
             };
             
         }
