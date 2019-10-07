@@ -21,7 +21,7 @@ namespace MonoShared
             
             text = new Text()
             {
-                text = "Hello world."
+                text = "Hello world!\nPlease press Button."
             };
             text.transform.Position = new Vector2(0,0);
             text.transform.Size = new Vector2(300, 100);
@@ -29,7 +29,7 @@ namespace MonoShared
             Instantiate(text);
    
             var textButton = new TextButton();
-            textButton.Text.text = "Text Button";
+            textButton.Text.text = "OK";
             textButton.transform.Position = new Vector2(350, 350);
             textButton.transform.Size = new Vector2(300, 100);
             textButton.onClick += () =>
