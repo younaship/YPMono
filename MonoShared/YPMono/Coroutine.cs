@@ -3,65 +3,67 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Timers;
 using YPMono;
 
-namespace MonoShared.YPMono
+namespace YPMono
 {
-    public class Coroutine : IEnumerator
+    public class Coroutine
     {
-        public Coroutine(SceneObject sceneObject)
+        public Coroutine(IEnumerator enumerator)
         {
-            this.sceneObject = sceneObject;
+            isEnable = true;
+            this.enumerator = enumerator;
         }
 
-        public SceneObject sceneObject { private set; get; }
-        public Action action { private set; get; }
-        public object Current => this;
+        public IEnumerator enumerator { private set; get; }
+        public bool isEnable { get; set; }
 
-        public void StartCoroutine(Action action)
+        public static Coroutine StartCoroutine(YPEvents update,YPEvents lete,IEnumerator enumerator)
         {
-            this.action = action;
+            var c = new Coroutine(enumerator);
+            c.Next(update, lete);
+            return c;
         }
 
-        public bool MoveNext()
+        public void Next(YPEvents updateEvents, YPEvents lateEvents)
         {
-            action?.Invoke();
-            return true;
+            if (!isEnable) return;
+            if (!this.enumerator.MoveNext()) return;
+            switch (this.enumerator.Current)
+            {
+                case WaitForSeconds w:
+                    Timer timer = new Timer(w.Time);
+                    timer.Elapsed += (o, e) =>
+                    {
+                        Next(updateEvents,lateEvents);
+                        timer.Stop();
+                        timer.Dispose();
+                    };
+                    timer.Start();
+                    break;
+                default:
+                    lateEvents.Add((s) => {
+                        updateEvents.Add((s_) => Next(updateEvents, lateEvents));
+                    });
+                    
+                    break;
+            }
         }
 
-        public void Reset()
+        public static void StopCoroutine(Coroutine coroutine)
         {
-            
+            coroutine.isEnable = false;
         }
     }
     
 
     public class WaitForSeconds
     {
-        public float Time { private get; set; }
+        public float Time { private set; get; }
         public WaitForSeconds(float time)
         {
             this.Time = time;
-        }
-    }
-
-    public class Test : SceneObject
-    {
-        public void StartCoroutine(IEnumerator coroutine)
-        {
-            coroutine.MoveNext();
-        }
-
-        public override void OnCreate(YPScene scene)
-        {
-            base.OnCreate(scene);
-            StartCoroutine(enumerator());
-        }
-
-        IEnumerator enumerator()
-        {
-            yield return null;
         }
     }
 

@@ -66,8 +66,6 @@ namespace YPMono.YPGUI
         protected override void OnTapEvent(YPScene scene, TouchLocation touch, bool isOn)
         {
             base.OnTapEvent(scene, touch, isOn);
-            Console.WriteLine("Event:" + touch.State + " On " + isOn + " IsPress " + IsPress);
-
         }
     }
 

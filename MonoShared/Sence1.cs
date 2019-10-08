@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
@@ -38,8 +39,11 @@ namespace MonoShared
             };
 
             Instantiate(textButton);
+
+            Instantiate(new TestObject());
+            
         }
-        
+
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

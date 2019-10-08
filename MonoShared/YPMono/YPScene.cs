@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -9,59 +10,79 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace YPMono
 {
-    public class YPScene : BaseGame
+    public partial class YPScene : BaseGame
     {
-
-        protected YPScene(): base() {
-            SceneObjects = new List<SceneObject>();
+        protected YPScene() : base() {
+            sceneObjects = new List<SceneObject>();
             backGroundColor = Color.CornflowerBlue;
             activeTapObjects = new Dictionary<int, SceneObject>();
+
+            updateEvents = new YPEvents();
+            lateUpdateEvents = new YPEvents();
         }
         
         public Action<SpriteBatch> drawEvents { get; set; }
+        public YPEvents updateEvents { get; private set; }
+        public YPEvents lateUpdateEvents { get; private set; }
 
-        public List<SceneObject> SceneObjects { private set; get; }
+        public List<SceneObject> sceneObjects { private set; get; }
         public Dictionary<int,SceneObject> activeTapObjects { set; get; } // 指を受け取っているオブジェクト(指id,Obj)
         public Color backGroundColor { get; set; }
 
-        protected GameTime updateTime { set; get; }
+        public GameTime updateTime { private set; get; }
 
+        bool isFirst = true;
+        
         public void Instantiate(SceneObject obj) {
             obj.OnCreate(this);
-            SceneObjects.Add(obj);
+            sceneObjects.Add(obj);
         }
 
         public void Destroy(SceneObject obj) {
             obj.OnDestory(this);
-            SceneObjects.Remove(obj);
+            sceneObjects.Remove(obj);
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
-            Start();
         }
 
         protected virtual void Start() { }
 
         protected override void Update(GameTime gameTime)
         {
-            updateTime = gameTime;
-            foreach (var obj in SceneObjects) obj.Update(this);
             base.Update(gameTime);
+            updateTime = gameTime;
+            if (isFirst) { isFirst = false; Start(); }
+
+            updateEvents.Run(this);
+            updateEvents.Clear();
+            foreach (var obj in sceneObjects) obj.Update(this);
+            lateUpdateEvents.Run(this);
+            lateUpdateEvents.Clear();
+
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(backGroundColor);
             spriteBatch.Begin();
-            drawEvents?.Invoke(spriteBatch);;
+            drawEvents?.Invoke(spriteBatch);
             drawEvents = null;
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
-        
+        public void StartCoroutine(IEnumerator coroutine)
+        {
+            Coroutine.StartCoroutine(updateEvents, lateUpdateEvents, coroutine);
+        }
+
+        public void StopCoroutine(Coroutine coroutine)
+        {
+            Coroutine.StopCoroutine(coroutine);
+        }
     }
 
     public class BaseGame : Game

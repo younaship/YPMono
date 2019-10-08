@@ -49,7 +49,6 @@ namespace YPMono.YPGUI
             {
                 if (IsPress) x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), HoverColor);
                 else x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), BackColor);
-                Console.WriteLine(IsPress);
             };
             
         }
