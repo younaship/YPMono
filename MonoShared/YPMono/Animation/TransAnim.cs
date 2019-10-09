@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using YPMono;
@@ -14,7 +16,12 @@ namespace YPMono.Animation
 
         public Transform transform { set; private get; }
 
-        public void MoveTo()
+        public void MoveTo(Vector2 position, float time)
+        {
+            Vector2.Lerp()
+        }
+
+        IEnumerator MoveTo_()
         {
             
         }

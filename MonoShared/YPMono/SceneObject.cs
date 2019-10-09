@@ -10,40 +10,38 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace YPMono
 {
-    public partial class SceneObject
+    public partial class SceneObject : Object
     {
         public SceneObject() { Init(); }
         public SceneObject(SceneObject root) { Init(); this.root = root; }
        
         public Transform transform { get; private set; }
-        public string Name { private set; get; }
         protected bool enableReciveTap = false; // タップを受信するUI
 
         public SceneObject root { set; get; }
-        public List<SceneObject> Children { set; get; }
+        public List<SceneObject> children { set; get; }
+        public List<Component> components { set; get; }
 
         public YPEvents updateEvents { get; private set; }
         public YPEvents lateUpdateEvents { get; private set; }
 
-        public virtual void OnCreate(YPScene scene) { }
-        public virtual void OnDestory(YPScene scene) { }
-
         private void Init()
         {
             transform = new Transform(this);
-            Children = new List<SceneObject>();
+            children = new List<SceneObject>();
+            components = new List<Component>();
 
             updateEvents = new YPEvents();
             lateUpdateEvents = new YPEvents();
         }
 
-        bool isFirst = true;
-        public virtual void Start(YPScene scene) {
-            isFirst = false;
+        public override void Start(YPScene scene)
+        {
+            base.Start(scene);
         }
 
-        public virtual void Update(YPScene scene) {
-            if (isFirst) Start(scene);
+        public override void Update(YPScene scene) {
+            base.Update(scene);
             if (enableReciveTap)
             {
                 var stats = TouchPanel.GetState();
@@ -60,13 +58,12 @@ namespace YPMono
                         OnTapEvent(scene, v, true);
                     }
             }
-
             updateEvents.Run(scene);
             updateEvents.Clear();
-            foreach (var v in Children) v.Update(scene); // Children Object Update Act.
+            foreach (var v in children) v.Update(scene); // Children Object Update Act.
+            foreach (var c in components) c.Update(); // Components Update Act.
             lateUpdateEvents.Run(scene);
             lateUpdateEvents.Clear();
-
         }
 
         /// <summary>
@@ -85,6 +82,20 @@ namespace YPMono
         public void StopCoroutine(Coroutine coroutine)
         {
             Coroutine.StopCoroutine(coroutine);
+        }
+
+        public void AddComponent<T>(T component)
+        {
+            var c = component as Component;
+            if (c is null) throw new Exception("Error. This is not Component.");
+            components.Add(c);
+        }
+
+        public void RemoveComponent<T>(T component)
+        {
+            var c = component as Component;
+            if (c is null) return;
+            if (components.Contains(c)) components.Remove(c);
         }
     }
 

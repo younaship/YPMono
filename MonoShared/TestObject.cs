@@ -20,7 +20,7 @@ namespace MonoShared
         {
             for(int i = 0; i < 33; i++)
             {
-                Console.WriteLine("[" + i + "] " + yPScene.updateTime.TotalGameTime);
+                Console.WriteLine("[" + i + "] " + Time.time);
                 yield return null;
             }
             while (true)

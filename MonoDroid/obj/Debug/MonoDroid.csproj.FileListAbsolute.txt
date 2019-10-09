@@ -114,5 +114,3 @@ U:\MonoGame\YPMono\MonoDroid\obj\Debug\linksrc\System.Runtime.Serialization.pdb
 U:\MonoGame\YPMono\MonoDroid\obj\Debug\linksrc\System.ServiceModel.Internals.pdb
 U:\MonoGame\YPMono\MonoDroid\obj\Debug\linksrc\System.Xml.Linq.pdb
 U:\MonoGame\YPMono\MonoDroid\obj\Debug\linksrc\System.Xml.pdb
-U:\MonoGame\YPMono\MonoDroid\bin\Android\AnyCPU\Debug\MonoDroid.dll
-U:\MonoGame\YPMono\MonoDroid\obj\Debug\linksrc\MonoDroid.dll.mdb

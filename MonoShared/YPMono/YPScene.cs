@@ -29,8 +29,6 @@ namespace YPMono
         public Dictionary<int,SceneObject> activeTapObjects { set; get; } // 指を受け取っているオブジェクト(指id,Obj)
         public Color backGroundColor { get; set; }
 
-        public GameTime updateTime { private set; get; }
-
         bool isFirst = true;
         
         public void Instantiate(SceneObject obj) {
@@ -53,7 +51,7 @@ namespace YPMono
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            updateTime = gameTime;
+            Time.SetGameTime(gameTime);
             if (isFirst) { isFirst = false; Start(); }
 
             updateEvents.Run(this);

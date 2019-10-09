@@ -4,13 +4,11 @@ using System.Text;
 
 namespace YPMono.Animation
 {
-    public class Animation
+    public class Animation : Component
     {
-        public Animation(SceneObject sceneObject)
+        public Animation(SceneObject sceneObject) : base(sceneObject)
         {
             this.sceneObject = sceneObject;
         }
-
-        public SceneObject sceneObject { set; get; }
     }
 }

@@ -15,9 +15,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)YPLib\TextSizer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\Animation\Animation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\Animation\TransAnim.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Component.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\Coroutine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Object.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\SceneObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TestObject.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)YPMono\Time.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\Transform.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)YPMono\YPGUI\Button.cs" />

@@ -61,6 +61,10 @@ namespace YPMono
     public class WaitForSeconds
     {
         public float Time { private set; get; }
+
+        /// <summary>
+        /// (time)ms 待機します。
+        /// </summary>
         public WaitForSeconds(float time)
         {
             this.Time = time;
