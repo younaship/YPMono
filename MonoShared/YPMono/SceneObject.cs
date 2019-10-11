@@ -74,9 +74,9 @@ namespace YPMono
 
         }
 
-        public void StartCoroutine(IEnumerator coroutine)
+        public Coroutine StartCoroutine(IEnumerator coroutine)
         {
-            Coroutine.StartCoroutine(updateEvents, lateUpdateEvents, coroutine);
+            return Coroutine.StartCoroutine(updateEvents, lateUpdateEvents, coroutine);
         }
 
         public void StopCoroutine(Coroutine coroutine)
@@ -84,9 +84,9 @@ namespace YPMono
             Coroutine.StopCoroutine(coroutine);
         }
 
-        public void AddComponent<T>(T component)
+        public void AddComponent(Component component)
         {
-            var c = component as Component;
+            var c = component as Component; 
             if (c is null) throw new Exception("Error. This is not Component.");
             components.Add(c);
         }
