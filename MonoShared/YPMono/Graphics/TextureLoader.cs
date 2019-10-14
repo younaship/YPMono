@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using YPMono;
 
-namespace YPMono.Graphic
+namespace YPMono.Graphics
 {
     public class TextureLoader
     {

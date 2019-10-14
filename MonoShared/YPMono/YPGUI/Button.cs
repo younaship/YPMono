@@ -45,11 +45,12 @@ namespace YPMono.YPGUI
         {
             base.Update(scene);
 
-            scene.drawEvents += (x) =>
-            {
-                if (IsPress) x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), HoverColor);
-                else x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), BackColor);
-            };
+            if (IsVisible)
+                scene.drawEvents += (x) =>
+                {
+                    if (IsPress) x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), HoverColor);
+                    else x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), BackColor);
+                };
             
         }
 

@@ -11,10 +11,11 @@ namespace YPMono.YPGUI
 {
     public class UI : SceneObject
     {
+        public bool IsVisible { set; get; }
         public bool IsPress { private set; get; }
         public static SpriteFont spriteFont { private set; get; }
 
-        public UI() { IsPress = false; }
+        public UI() { IsVisible = true; IsPress = false; }
 
         public override void OnCreate(YPScene scene)
         {
