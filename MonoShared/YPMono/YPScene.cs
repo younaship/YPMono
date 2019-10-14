@@ -13,6 +13,7 @@ namespace YPMono
     public partial class YPScene : BaseGame
     {
         protected YPScene() : base() {
+            scene = this;
             sceneObjects = new List<SceneObject>();
             backGroundColor = Color.CornflowerBlue;
             activeTapObjects = new Dictionary<int, SceneObject>();
@@ -20,6 +21,8 @@ namespace YPMono
             updateEvents = new YPEvents();
             lateUpdateEvents = new YPEvents();
         }
+
+        public static YPScene scene { get; private set; }
         
         public Action<SpriteBatch> drawEvents { get; set; }
         public YPEvents updateEvents { get; private set; }
