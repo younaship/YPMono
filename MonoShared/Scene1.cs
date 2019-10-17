@@ -15,7 +15,7 @@ using YPMono.Graphics;
 
 namespace MonoShared
 {
-    class Sence1 : YPScene
+    class Scene1 : YPScene
     {
         Text text;
 
@@ -25,7 +25,7 @@ namespace MonoShared
             {
                 text = "Hello world!\nPlease press Button."
             };
-            text.transform.Position = new Vector2(0, 0);
+            text.transform.Position = new Vector2(200, 200);
             text.transform.Size = new Vector2(300, 100);
 
             var anim = new TransAnim(text);
@@ -41,7 +41,7 @@ namespace MonoShared
             {
                 text.text = "Clickd.";
                 text.transform.Position = new Vector2(0, 0);
-                anim.MoveTo(new Vector2(500, 500), 1);
+                text.transform.Rotation += 3.14f;
             };
 
             Instantiate(textButton);
@@ -50,7 +50,12 @@ namespace MonoShared
             textButton2.Text.text = "OK 2";
             textButton2.transform.Position = new Vector2(350, 500);
             textButton2.transform.Size = new Vector2(300, 100);
-            textButton2.onClick += () => { Console.WriteLine("2 pushed"); SceneManager.LoadScene<Scene2>(); };
+
+            textButton2.onClick += () => {
+                Console.WriteLine("2 pushed");
+                anim.RotateToByDag(720, 1);
+                //SceneManager.LoadScene<Scene2>();
+            };
 
             Instantiate(textButton2);
 

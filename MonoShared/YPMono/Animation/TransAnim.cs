@@ -17,10 +17,12 @@ namespace YPMono.Animation
         }
 
         public Transform transform { private set; get; }
+        public bool IsActiveSameAnim { set; get; }
         public List<Type> running { private set; get; }
 
         public Coroutine MoveTo(Vector2 position, float time)
         {
+            if (!IsActiveSameAnim && running.Contains(Type.Move)) return null;
             running.Add(Type.Move);
             return sceneObject.StartCoroutine(MoveTo_(transform.Position, position, time));       
         }
@@ -39,13 +41,22 @@ namespace YPMono.Animation
             running.Remove(Type.Move);
         }
 
-        public Coroutine RotateTo(float rad,float time)
+        /// <summary>
+        /// Transform Rotate.( need value is "rad". 360°is 2 * PI.)
+        /// </summary>
+        public Coroutine RotateTo(float rad, float time)
         {
+            if (!IsActiveSameAnim && running.Contains(Type.Rotate)) return null;
             running.Add(Type.Rotate);
-            return sceneObject.StartCoroutine(RorateTo_(transform.Rotation, rad, time));
+            return sceneObject.StartCoroutine(RotateTo_(transform.Rotation, rad, time));
         }
 
-        IEnumerator RorateTo_(float start,float end,float time)
+        public Coroutine RotateToByDag(float dag,float time)
+        {
+            return RotateTo((float)((dag / 360) * 2 * Math.PI), time);
+        }
+
+        IEnumerator RotateTo_(float start,float end,float time)
         {
             var t = Time.time;
             while(Time.time < t + time)
@@ -53,6 +64,7 @@ namespace YPMono.Animation
                 var l = Time.time - t;
                 var par = (float)(l / time);
                 transform.Rotation = start + par * (end - start);
+                Console.WriteLine("par:" + par + " r" + transform.Rotation);
                 yield return null;
             }
             transform.Rotation = start + end;

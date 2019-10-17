@@ -16,7 +16,7 @@ namespace MonoShared
                 x.transform.Position = new Microsoft.Xna.Framework.Vector2(100, 100);
                 x.transform.Size = new Microsoft.Xna.Framework.Vector2(300, 100);
                 x.Text.text = "OK";
-                x.onClick += () => SceneManager.LoadScene<Sence1>();
+                x.onClick += () => SceneManager.LoadScene<Scene1>();
             }));
             
         }

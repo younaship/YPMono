@@ -53,6 +53,7 @@ namespace YPMono
 
         public static void StopCoroutine(Coroutine coroutine)
         {
+            if (coroutine is null) return;
             coroutine.isEnable = false;
         }
     }

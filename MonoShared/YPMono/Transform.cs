@@ -25,7 +25,8 @@ namespace YPMono
         public Vector2 LocalPosition { set; get; }
         public Vector2 Size;
         public float Scale;
-        public float Rotation;
+        float rotation;
+        public float Rotation { get { return rotation; } set{ SetRotation(value); } }
 
         public TransAnim transAnim { get; set; }
 
@@ -48,6 +49,18 @@ namespace YPMono
         {
             if (sceneObject.root != null) this.LocalPosition = GetAbsPosition(sceneObject.root.transform.Position, pos);
             else this.LocalPosition = pos;
+        }
+
+        private void SetRotation(float rotation)
+        {
+
+            if ((rotation > 2 * Math.PI) || (rotation < -2 * Math.PI))
+                this.rotation = (float)(rotation % (Math.PI * 2));
+            else
+                this.rotation = rotation;
+
+            if (Math.Abs(this.rotation) < 0.001f) this.rotation = 0f;
+
         }
 
         /// <summary>
