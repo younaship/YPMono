@@ -12,12 +12,12 @@ namespace YPMono.Graphics
     {
         public static Texture2D GetFromContent(string path)
         {
-            return YPScene.scene.Content.Load<Texture2D>(path);
+            return YPGame.main.Content.Load<Texture2D>(path);
         }
 
         public static Texture2D GetFromFile(Stream stream)
         {
-            return Texture2D.FromStream(YPScene.scene.GraphicsDevice, stream);
+            return Texture2D.FromStream(YPGame.main.GraphicsDevice, stream);
         }
     }
 }

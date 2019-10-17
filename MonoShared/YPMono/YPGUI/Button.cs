@@ -9,7 +9,7 @@ namespace YPMono.YPGUI
 {
     public class Button : UI
     {
-        Texture2D tex;
+        protected Texture2D tex;
 
         public GUIEventHundler onClick { set; get; }
         public GUIEventHundler onHover { set; get; }
@@ -28,7 +28,7 @@ namespace YPMono.YPGUI
         {
             base.OnCreate(scene);
 
-            tex = new Texture2D(scene.GraphicsDevice, 1, 1);
+            tex = new Texture2D(YPGame.main.GraphicsDevice, 1, 1);
             tex.SetData<Color>(new Color[] { Color.White });
         }
 
@@ -53,19 +53,20 @@ namespace YPMono.YPGUI
                 };
             
         }
+        
 
-        protected override void OnTapEvent(YPScene scene, TouchLocation touch, bool isOn)
-        {
-            base.OnTapEvent(scene, touch, isOn);
-
-        }
-
+        /// <summary>
+        /// This act is before Update();
+        /// </summary>
         protected override void OnClick()
         {
             base.OnClick();
             onClick?.Invoke();
         }
 
+        /// <summary>
+        /// This act is before Update();
+        /// </summary>
         protected override void OnHover()
         {
             base.OnHover();

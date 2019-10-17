@@ -10,9 +10,9 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace YPMono
 {
-    public partial class YPScene : BaseGame
+    public partial class YPScene
     {
-        protected YPScene() : base() {
+        protected YPScene(){
             scene = this;
             sceneObjects = new List<SceneObject>();
             backGroundColor = Color.CornflowerBlue;
@@ -29,6 +29,7 @@ namespace YPMono
         public YPEvents lateUpdateEvents { get; private set; }
 
         public List<SceneObject> sceneObjects { private set; get; }
+        public TouchCollection touchLocations { get; private set; } // Touch.GetState();
         public Dictionary<int,SceneObject> activeTapObjects { set; get; } // 指を受け取っているオブジェクト(指id,Obj)
         public Color backGroundColor { get; set; }
 
@@ -44,17 +45,13 @@ namespace YPMono
             sceneObjects.Remove(obj);
         }
 
-        protected override void LoadContent()
-        {
-            base.LoadContent();
-        }
+        public virtual void Start() { }
 
-        protected virtual void Start() { }
-
-        protected override void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
             Time.SetGameTime(gameTime);
+            touchLocations = TouchPanel.GetState();
+
             if (isFirst) { isFirst = false; Start(); }
 
             updateEvents.Run(this);
@@ -65,14 +62,13 @@ namespace YPMono
 
         }
 
-        protected override void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(backGroundColor);
-            spriteBatch.Begin();
-            drawEvents?.Invoke(spriteBatch);
+            YPGame.main.GraphicsDevice.Clear(backGroundColor);
+            YPGame.main.spriteBatch.Begin();
+            drawEvents?.Invoke(YPGame.main.spriteBatch);
             drawEvents = null;
-            spriteBatch.End();
-            base.Draw(gameTime);
+            YPGame.main.spriteBatch.End();
         }
 
         public void StartCoroutine(IEnumerator coroutine)
@@ -84,23 +80,28 @@ namespace YPMono
         {
             Coroutine.StopCoroutine(coroutine);
         }
+
+        public virtual void OnSceneCreate() { } // Scene already seted.
+        public virtual void OnSceneDestroy() { } // Scene already closed and new scene is seted.
     }
 
-    public class BaseGame : Game
+    public class YPGame : Game
     {
-        protected BaseGame() {
+        public static YPGame main { private set; get; }
+        protected GraphicsDeviceManager graphics;
+        public SpriteBatch spriteBatch { private set; get; }
+        public YPScene scene { private set; get; }
+
+        public YPGame(YPScene scene) {
+            main = this;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = true;
+            this.scene = scene;
         }
-
-        protected GraphicsDeviceManager graphics;
-        public SpriteBatch spriteBatch;
-
 
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             base.LoadContent();
         }
@@ -117,6 +118,18 @@ namespace YPMono
             }
 #endif
             base.Update(gameTime);
+            scene.Update(gameTime);
+        }
+
+        protected override void Draw(GameTime gameTime)
+        {
+            base.Draw(gameTime);
+            scene.Draw(gameTime);
+        }
+
+        public void SetScene(YPScene scene)
+        {
+            this.scene = scene;
         }
     }
 }

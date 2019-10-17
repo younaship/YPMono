@@ -44,10 +44,11 @@ namespace YPMono
             base.Update(scene);
             if (enableReciveTap)
             {
-                var stats = TouchPanel.GetState();
-                foreach (var v in stats)
+                var ts = scene.touchLocations;
+                foreach (var v in ts)
                     if (scene.activeTapObjects.ContainsKey(v.Id))
                     {
+                        if (scene.activeTapObjects[v.Id] != this) continue;
                         if (this.transform.GetOnPosition(v.Position)) OnTapEvent(scene, v, true);
                         else OnTapEvent(scene, v, false);
                         if (v.State == TouchLocationState.Invalid || v.State == TouchLocationState.Released) scene.activeTapObjects.Remove(v.Id);
@@ -58,10 +59,10 @@ namespace YPMono
                         OnTapEvent(scene, v, true);
                     }
             }
+            foreach (var c in components) c.Update(); // Components Update Act.
             updateEvents.Run(scene);
             updateEvents.Clear();
             foreach (var v in children) v.Update(scene); // Children Object Update Act.
-            foreach (var c in components) c.Update(); // Components Update Act.
             lateUpdateEvents.Run(scene);
             lateUpdateEvents.Clear();
         }
@@ -96,6 +97,18 @@ namespace YPMono
             var c = component as Component;
             if (c is null) return;
             if (components.Contains(c)) components.Remove(c);
+        }
+
+        public SceneObject Set(Action<SceneObject> action)
+        {
+            action?.Invoke(this);
+            return this;
+        }
+
+        public SceneObject Set<T>(Action<T> action) where T : SceneObject
+        {
+            action?.Invoke(this as T);
+            return this;
         }
     }
 

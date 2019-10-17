@@ -21,10 +21,9 @@ namespace MonoDroid
             YPMono.Platform.Android.Init(this);
             // var g = new Game1();
             // var g = new MonoShared.Game1();
-            var g = new MonoShared.Sence1();
+            var g = new YPMono.YPGame(new MonoShared.Sence1());
             SetContentView((View)g.Services.GetService(typeof(View)));
-            g.Run();
-            
+            g.Run();     
         }
     }
 }

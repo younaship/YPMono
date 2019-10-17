@@ -11,7 +11,9 @@ namespace YPMono
         {
             var old = YPScene.scene;
             var scene = new T();
-            Platform.Platform.Current.SetScene(scene);
+            YPGame.main.SetScene(scene);
+            scene.OnSceneCreate();
+            old.OnSceneDestroy();
         }
     }
 }

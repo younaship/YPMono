@@ -13,14 +13,15 @@ namespace YPMono.YPGUI
     {
         public bool IsVisible { set; get; }
         public bool IsPress { private set; get; }
+        public Layout layout { private set; get; }
+
         public static SpriteFont spriteFont { private set; get; }
 
-        public UI() { IsVisible = true; IsPress = false; }
+        public UI() { IsVisible = true; IsPress = false; layout = new Layout(); }
 
         public override void OnCreate(YPScene scene)
         {
-            if (spriteFont == null) spriteFont = spriteFont = scene.Content.Load<SpriteFont>("SPFont");
-            base.OnCreate(scene);
+            if (spriteFont == null) spriteFont = spriteFont = YPGame.main.Content.Load<SpriteFont>("SPFont");
         }
 
         protected override void OnTapEvent(YPScene scene, TouchLocation touch, bool isOn)
@@ -33,6 +34,12 @@ namespace YPMono.YPGUI
             {
                 if (isOn) OnClick();
             }
+        }
+
+        public override void Update(YPScene scene)
+        {
+            layout.LayoutUpdate(scene);
+            base.Update(scene);
         }
 
         protected virtual void OnClick()

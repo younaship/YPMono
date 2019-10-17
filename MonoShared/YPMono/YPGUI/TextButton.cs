@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input.Touch;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,7 +24,6 @@ namespace YPMono.YPGUI
 
             this.Text.transform.Size = this.transform.Size;
             scene.Instantiate(Text);
-            Text.OnCreate(scene);
         }
 
         public override void Start(YPScene scene)

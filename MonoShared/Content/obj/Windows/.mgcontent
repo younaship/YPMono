@@ -4,7 +4,7 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>U:/MonoGame/YPMono/MonoShared/Content/SPFont.spritefont</File>
+    <File>U:/MonoGame/YPMono/MonoShared/Content/oekaki.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

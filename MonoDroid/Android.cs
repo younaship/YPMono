@@ -17,7 +17,7 @@ namespace YPMono.Platform
 
         public void SetScene(YPScene scene)
         {
-            activity.SetContentView((View)scene.Services.GetService(typeof(View)));
+            //activity.SetContentView((View)scene.Services.GetService(typeof(View)));
         }        
     }
 }

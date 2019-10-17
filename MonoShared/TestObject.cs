@@ -18,14 +18,14 @@ namespace MonoShared
 
         IEnumerator enumerator(YPScene yPScene)
         {
-            for(int i = 0; i < 33; i++)
+            for(int i = 0; i < 10; i++)
             {
-                Console.WriteLine("[" + i + "] " + Time.time);
+                Console.WriteLine(Time.time);
                 yield return null;
             }
-            while (true)
+            for(int i = 0; i < 10; i++)
             {
-                Console.WriteLine("HEY");
+                Console.WriteLine(Time.time);
                 yield return new WaitForSeconds(1000);
             }
         }

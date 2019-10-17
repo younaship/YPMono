@@ -19,10 +19,8 @@ namespace MonoShared
     {
         Text text;
 
-        protected override void Start()
-        {
-            SceneManager.LoadScene<Scene2>();
-            /*
+        public override void Start()
+        { 
             text = new Text()
             {
                 text = "Hello world!\nPlease press Button."
@@ -52,7 +50,7 @@ namespace MonoShared
             textButton2.Text.text = "OK 2";
             textButton2.transform.Position = new Vector2(350, 500);
             textButton2.transform.Size = new Vector2(300, 100);
-            textButton2.onClick += () => { Console.WriteLine("2 pushed"); };
+            textButton2.onClick += () => { Console.WriteLine("2 pushed"); SceneManager.LoadScene<Scene2>(); };
 
             Instantiate(textButton2);
 
@@ -65,13 +63,13 @@ namespace MonoShared
             Instantiate(image);/**/
         }
 
-        protected override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
            // text.transform.Rotation += 0.1f;
         }
 
-        protected override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
         }

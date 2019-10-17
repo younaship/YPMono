@@ -15,7 +15,7 @@ namespace YPMono.YPGUI
 
         public Image()
         {
-            color = Color.White;
+            color = Color.Gray;
         }
 
         public override void OnCreate(YPScene scene)
@@ -37,5 +37,6 @@ namespace YPMono.YPGUI
                     x.Draw(texture, rectangle, color);
                 };
         }
+
     }
 }
