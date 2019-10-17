@@ -18,11 +18,13 @@ namespace MonoDroid
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
+            YPMono.Platform.Android.Init(this);
             // var g = new Game1();
             // var g = new MonoShared.Game1();
             var g = new MonoShared.Sence1();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
+            
         }
     }
 }
