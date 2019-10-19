@@ -1,6 +1,6 @@
 # YPMono
 MonoGameをUnity風に扱えるようにするためのライブラリ。  
-詳細 → [https://younaship.com/ypmono/](https://younaship.com/ypmono/)
+詳細 [https://younaship.com/ypmono/](https://younaship.com/ypmono/)
 (19/10/01 : 開発開始)
 
 ## 例
@@ -52,3 +52,5 @@ MonoGameをUnity風に扱えるようにするためのライブラリ。
         }
 
 ```
+
+Younaship[https://younaship.com/]
