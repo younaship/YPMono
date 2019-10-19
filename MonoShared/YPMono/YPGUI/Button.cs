@@ -9,19 +9,24 @@ namespace YPMono.YPGUI
 {
     public class Button : UI
     {
+        const byte HOVER_DARK_RANGE = 30;
         protected Texture2D tex;
 
         public GUIEventHundler onClick { set; get; }
         public GUIEventHundler onHover { set; get; }
 
         public Color BackColor { set; get; }
-        public Color HoverColor { set; get; }
+        public Color? HoverColor { set; get; }
+
+        public static Vector2 DefaultSize { get { return new Vector2(320, 80); } }
 
         public Button()
         {
             enableReciveTap = true;
             BackColor = Color.Gray;
-            HoverColor = Color.DarkGray;
+            HoverColor = null;
+
+            transform.Size = DefaultSize;
         }
 
         public override void OnCreate(YPScene scene)
@@ -44,11 +49,12 @@ namespace YPMono.YPGUI
         public override void Update(YPScene scene)
         {
             base.Update(scene);
-
+            Color hoverColor = HoverColor ?? GetToDark(BackColor);
+            
             if (IsVisible)
                 scene.drawEvents += (x) =>
                 {
-                    if (IsPress) x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), HoverColor);
+                    if (IsPress) x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), hoverColor);
                     else x.Draw(tex, new Rectangle(transform.Position.ToPoint(), transform.Size.ToPoint()), BackColor);
                 };
             
@@ -71,6 +77,18 @@ namespace YPMono.YPGUI
         {
             base.OnHover();
             onHover?.Invoke();
+        }
+
+        Color GetToDark(Color color)
+        {
+            return new Color(AddDark(color.R), AddDark(color.G), AddDark(color.B), color.A);
+        }
+
+        byte AddDark(byte val)
+        {
+            var v = val - HOVER_DARK_RANGE;
+            if (v < 0) v = 0;
+            return (byte)v;
         }
     }
 

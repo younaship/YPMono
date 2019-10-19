@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using YPMono;
 
-namespace YPMono.Animation
+namespace YPMono
 {
     public class TransAnim : Animation
     {

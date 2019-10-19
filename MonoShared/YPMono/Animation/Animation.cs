@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace YPMono.Animation
+namespace YPMono
 {
     public class Animation : Component
     {

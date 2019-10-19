@@ -20,5 +20,14 @@ namespace YPMono
         {
             if (isFirst) Start(scene);
         }
+
+    }
+
+    public class ExList<T> : List<T>
+    {
+        public new void Add(T item)
+        {
+            base.Add(item);
+        }
     }
 }

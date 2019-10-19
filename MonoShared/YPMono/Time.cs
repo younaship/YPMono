@@ -10,7 +10,7 @@ namespace YPMono
         public static double time { private set; get; }
         public static double deltaTime { private set; get; }
 
-        static double beforeFrameTime; 
+        static double beforeFrameTime = 0;
 
         public static void SetGameTime(GameTime gameTime)
         {

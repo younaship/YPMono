@@ -13,7 +13,15 @@ namespace MonoShared
         {
             base.Start(scene);
 
-            StartCoroutine(enumerator(scene));
+            Console.WriteLine(Time.time);
+            //StartCoroutine(enumerator(scene));
+        }
+
+        public override void Update(YPScene scene)
+        {
+            base.Update(scene);
+
+            Console.WriteLine(Time.time);
         }
 
         IEnumerator enumerator(YPScene yPScene)

@@ -21,6 +21,7 @@ namespace YPMono.YPGUI
 
         public override void OnCreate(YPScene scene)
         {
+            base.OnCreate(scene);
             if (spriteFont == null) spriteFont = spriteFont = YPGame.main.Content.Load<SpriteFont>("SPFont");
         }
 

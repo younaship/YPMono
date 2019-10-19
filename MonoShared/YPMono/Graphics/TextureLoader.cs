@@ -6,18 +6,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using YPMono;
 
-namespace YPMono.Graphics
+namespace YPMono
 {
     public class TextureLoader
     {
         public static Texture2D GetFromContent(string path)
         {
-            return YPGame.main.Content.Load<Texture2D>(path);
+            var tex = YPGame.main.Content.Load<Texture2D>(path);
+            if (tex is null) throw new Exception("Load Texture Missing.");
+            return tex;
         }
 
         public static Texture2D GetFromFile(Stream stream)
         {
-            return Texture2D.FromStream(YPGame.main.GraphicsDevice, stream);
+            var tex = Texture2D.FromStream(YPGame.main.GraphicsDevice, stream);
+            if (tex is null) throw new Exception("Load Texture Missing.");
+            return tex;
         }
     }
 }

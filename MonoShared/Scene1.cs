@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 using YPMono;
 using YPMono.YPGUI;
-using YPMono.Animation;
-using YPMono.Graphics;
 
 namespace MonoShared
 {
@@ -40,8 +38,7 @@ namespace MonoShared
             textButton.onClick += () =>
             {
                 text.text = "Clickd.";
-                text.transform.Position = new Vector2(0, 0);
-                text.transform.Rotation += 3.14f;
+                anim.RotateToByDag(720, 1);
             };
 
             Instantiate(textButton);
@@ -52,9 +49,8 @@ namespace MonoShared
             textButton2.transform.Size = new Vector2(300, 100);
 
             textButton2.onClick += () => {
-                Console.WriteLine("2 pushed");
-                anim.RotateToByDag(720, 1);
-                //SceneManager.LoadScene<Scene2>();
+                Console.WriteLine("2 pushed");              
+                SceneManager.LoadScene<Scene2>();
             };
 
             Instantiate(textButton2);
@@ -66,6 +62,7 @@ namespace MonoShared
             image.texture = TextureLoader.GetFromContent("oekaki");
 
             Instantiate(image);/**/
+            Instantiate(new TestObject());
         }
 
         public override void Update(GameTime gameTime)

@@ -35,6 +35,13 @@ namespace YPMono
             lateUpdateEvents = new YPEvents();
         }
 
+        public override void OnCreate(YPScene scene)
+        {
+            base.OnCreate(scene);
+            foreach (var v in this.children)
+                v.OnCreate(scene);
+        }
+
         public override void Start(YPScene scene)
         {
             base.Start(scene);
@@ -107,8 +114,16 @@ namespace YPMono
 
         public SceneObject Set<T>(Action<T> action) where T : SceneObject
         {
-            action?.Invoke(this as T);
+            var item = this as T;
+            if (item is null) throw new Exception("Object Type Error.");
+            action?.Invoke(item);
             return this;
+        }
+
+        public void Add(SceneObject child)
+        {
+            child.root = this;
+            children.Add(child);
         }
     }
 
