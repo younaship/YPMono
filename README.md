@@ -1,7 +1,6 @@
 # YPMono
 MonoGameをUnity風に扱えるようにするためのライブラリ。  
 詳細 [https://younaship.com/ypmono/](https://younaship.com/ypmono/)
-(19/10/01 : 開発開始)
 
 ## 例
 ボタンをクリックするとメッセージが変わるだけの簡単なサンプル
